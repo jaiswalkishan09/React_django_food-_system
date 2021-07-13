@@ -4,7 +4,7 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import ForeignKey
 
 # Create your models here.
-class Company(models.Model):
+class Restraunt(models.Model):
     id=models.AutoField(primary_key=True)
     name=models.CharField(max_length=255)
     license_no=models.CharField(max_length=255)
@@ -20,7 +20,7 @@ class Food(models.Model):
     name=models.CharField(max_length=255)
     Food_type=models.CharField(max_length=255)
     sell_price=models.CharField(max_length=255)
-    company_id=models.ForeignKey(Company,on_delete=models.CASCADE)
+    restraunt_id=models.ForeignKey(Restraunt,on_delete=models.CASCADE)
     Available=models.BooleanField(blank=True)
     objects=models.Manager()
 
@@ -80,11 +80,11 @@ class CustomerRequest(models.Model):
     prescription=models.FileField(default="")
     objects=models.Manager()
 
-class CompanyAccount(models.Model):
+class RestrauntAccount(models.Model):
     choices=((1,"Debit"),(2,"Credit"))
 
     id=models.AutoField(primary_key=True)
-    company_id=models.ForeignKey(Company,on_delete=models.CASCADE)
+    restraunt_id=models.ForeignKey(Restraunt,on_delete=models.CASCADE)
     transaction_type=models.CharField(choices=choices,max_length=255)
     transaction_amt=models.CharField(max_length=255)
     transaction_date=models.DateField()
@@ -92,11 +92,11 @@ class CompanyAccount(models.Model):
     added_on=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()
 
-class CompanyBank(models.Model):
+class RestrauntBank(models.Model):
     id=models.AutoField(primary_key=True)
     bank_account_no=models.CharField(max_length=255)
     ifsc_no=models.CharField(max_length=255)
-    company_id=models.ForeignKey(Company,on_delete=models.CASCADE)
+    restraunt_id=models.ForeignKey(Restraunt,on_delete=models.CASCADE)
     added_on=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()
 
