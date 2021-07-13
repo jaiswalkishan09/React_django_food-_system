@@ -11,7 +11,8 @@ class Company(models.Model):
     address=models.CharField(max_length=255)
     contact_no=models.CharField(max_length=255)
     email=models.CharField(max_length=254)
-
+    added_on=models.DateTimeField(auto_now_add=True)
+    objects=models.Manager()
 
 
 class Food(models.Model):
